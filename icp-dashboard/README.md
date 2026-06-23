@@ -24,7 +24,8 @@ icp-dashboard/
 │   ├── support-tickets.md   # pains, in their words
 │   └── sales-call-notes.md  # why they actually buy
 └── example-output/      # a finished run, committed so you can see the deliverable
-    └── icp-dossier.html
+    ├── icp-dossier.html     # the ICP page
+    └── campaign.html        # the scored PMax asset bundle
 ```
 
 *"The memory stopped being about chat history. It became about disk state."* When the work is on disk, a new Claude Code session picks up exactly where the last one left off. The mesh is the value — not any single file.
@@ -46,8 +47,11 @@ The dummy data is already in `dummy-data/` — nothing to download. From this fo
      [`ad-copy`](skills/ad-copy/SKILL.md) skill.)
 4. Open the two HTML files in a browser. That's the deliverable.
 
-A finished `icp-dossier.html` is already committed in [`example-output/`](example-output/) so
-you can see exactly what comes out before you run it.
+Finished [`icp-dossier.html`](example-output/icp-dossier.html) and
+[`campaign.html`](example-output/campaign.html) are both committed in `example-output/` so you
+can see exactly what comes out before you run it. The campaign page is a full Google PMax
+asset bundle (25 text assets + 12 image specs), every line scored against the ICP — modeled
+on the real CXL bundles.
 
 No real customer data needed. The included data is fake but shaped like a real export, with a
 clear high-value segment (the agency owners) to find.

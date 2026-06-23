@@ -8,6 +8,7 @@ secrets/
 # Generated live in the workshop (the dossier is committed as a reference)
 icp-dashboard/example-output/*.html
 !icp-dashboard/example-output/icp-dossier.html
+!icp-dashboard/example-output/campaign.html
 # OS / editor noise
 .DS_Store
 node_modules/

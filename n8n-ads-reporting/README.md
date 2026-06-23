@@ -32,11 +32,27 @@ You make the decisions. The workflow is the analyst, not the boss.
 
 ## Run it with dummy data (the demo)
 
-1. In n8n: **Workflows → Import from File** and select [`starter-workflow.json`](starter-workflow.json).
-2. Open the **Post to Slack** node and paste your Slack incoming webhook URL (create one at api.slack.com/apps → Incoming Webhooks). That's the only setup.
-3. Click **Test workflow**. The two Code nodes return the sample data in [`dummy-data/`](dummy-data/), the analysis node grades it, and the digest posts to your Slack channel.
+There is no import button on the n8n **Overview** screen. In n8n you import from *inside*
+a workflow, so you create a blank one first. From the Overview screen:
 
-No Google or Meta account required. It runs entirely on the dummy data so you see the whole pipeline fire end to end.
+1. Click **Create workflow** (top-right of the screen).
+2. On the empty canvas, open the **⋯** menu (top-right, next to the **Save** button).
+3. Choose **Import from URL...** and paste this, then **Import**:
+   ```
+   https://raw.githubusercontent.com/nickyc1/ship-icp-ads-automate-monitoring/main/n8n-ads-reporting/starter-workflow.json
+   ```
+   *(Or choose **Import from File...** and pick `n8n-ads-reporting/starter-workflow.json` from your clone — same result.)*
+4. The 6-node workflow drops onto the canvas. Click the **Post to Slack** node, and in the
+   **URL** field paste your Slack incoming webhook (create one at api.slack.com/apps →
+   Incoming Webhooks). That is the only setup.
+5. Click **Test workflow** (button at the bottom-center). The two Code nodes emit the dummy
+   data, **Analyze** grades it, and the digest posts to your Slack channel.
+
+No Google or Meta account required. It runs entirely on the dummy data so you see the whole
+pipeline fire end to end.
+
+> Demo tip: **Import from URL** is the cleanest move on a screen share — no file dialog, no
+> hunting through folders. Have the Slack webhook ready in your clipboard beforehand.
 
 ## Point it at your own accounts
 

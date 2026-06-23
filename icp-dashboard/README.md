@@ -18,8 +18,13 @@ icp-dashboard/
 │   ├── icp-synthesis/   # turn a raw customer list into a grounded ICP
 │   └── ad-copy/         # turn the ICP into scored Google + Meta copy
 ├── voice/               # the non-negotiable voice rules every output passes through
-├── dummy-data/          # a fake customer list so the demo runs
-└── example-output/      # what a finished run looks like
+├── dummy-data/          # fake but realistic customer data so the demo runs
+│   ├── customers.csv        # the list: revenue, orders, title, company
+│   ├── reviews.md           # verbatim review language
+│   ├── support-tickets.md   # pains, in their words
+│   └── sales-call-notes.md  # why they actually buy
+└── example-output/      # a finished run, committed so you can see the deliverable
+    └── icp-dossier.html
 ```
 
 *"The memory stopped being about chat history. It became about disk state."* When the work is on disk, a new Claude Code session picks up exactly where the last one left off. The mesh is the value — not any single file.
@@ -28,14 +33,31 @@ icp-dashboard/
 
 ## Run it (the demo)
 
-1. In Claude Code, open this folder.
-2. Drop your customer export into `dummy-data/` (or use the included `customers.csv`).
-3. Paste [`BUILD-PROMPT.md`](BUILD-PROMPT.md). Claude will:
-   - **Synthesize the ICP** from the list using the [`icp-synthesis`](skills/icp-synthesis/SKILL.md) skill — find the rich avatar, the segments, the exact language.
-   - **Build an ICP page** — a single HTML dossier you can open: who they are, what they want, the words they use.
-   - **Build an example Google Ads campaign** — RSA/PMax copy and audiences on a separate page, every asset scored against the ICP using the [`ad-copy`](skills/ad-copy/SKILL.md) skill.
+The dummy data is already in `dummy-data/` — nothing to download. From this folder:
 
-No real customer data required to follow along. The included list is fake but shaped like a real export, with a clear high-value segment to find.
+1. Open this folder in Claude Code (`claude` in your terminal, or the Claude Code extension).
+2. Paste the prompt in [`BUILD-PROMPT.md`](BUILD-PROMPT.md) and hit enter.
+3. Claude reads the data and the skills, then writes two pages into `example-output/`:
+   - **`icp-dossier.html`** — the ICP page. The rich avatar up top, the segments below, a
+     "their words" section of verbatim language, and the pains and desires. (Use the
+     [`icp-synthesis`](skills/icp-synthesis/SKILL.md) skill.)
+   - **`campaign.html`** — an example Google Ads campaign for that avatar: RSA/PMax copy and
+     audiences, every asset scored 1–5 against the ICP, anything under 4 cut. (Use the
+     [`ad-copy`](skills/ad-copy/SKILL.md) skill.)
+4. Open the two HTML files in a browser. That's the deliverable.
+
+A finished `icp-dossier.html` is already committed in [`example-output/`](example-output/) so
+you can see exactly what comes out before you run it.
+
+No real customer data needed. The included data is fake but shaped like a real export, with a
+clear high-value segment (the agency owners) to find.
+
+### What to look for when it runs
+- The avatar comes from the **top ~10% by revenue** — the agency owners (Jordan, Marisol,
+  Tomas), not the one-time buyers.
+- The copy echoes the **verbatim language** ("lifetime deals are a cheat code for an agency"),
+  not generic SaaS-speak.
+- Rows with blank fields **stay blank** in the dossier. Empty beats hallucinated.
 
 ## The 7-step synthesis (what the skill does)
 

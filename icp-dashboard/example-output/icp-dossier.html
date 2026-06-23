@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ICP Dossier — Acme Deals (dummy data)</title>
+<style>
+  :root{
+    --ink:#15171a; --muted:#5b6573; --line:#e7e9ee; --bg:#f6f7f9; --card:#ffffff;
+    --accent:#d61f2c; --accentsoft:#fde7e8; --good:#0f9d58;
+    --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);line-height:1.5;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:920px;margin:0 auto;padding:40px 24px 80px}
+  .tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);background:var(--accentsoft);padding:5px 10px;border-radius:999px}
+  h1{font-size:34px;line-height:1.15;margin:14px 0 6px;letter-spacing:-.02em}
+  .sub{color:var(--muted);font-size:15px;margin:0 0 30px}
+  h2{font-size:13px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin:38px 0 14px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px}
+  .avatar{display:flex;gap:22px;align-items:flex-start}
+  .badge{flex:0 0 64px;height:64px;width:64px;border-radius:16px;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:800}
+  .avatar h3{margin:0 0 2px;font-size:22px;letter-spacing:-.01em}
+  .avatar .role{color:var(--muted);font-size:14px;margin:0 0 14px}
+  .avatar p{margin:0 0 12px;font-size:15.5px}
+  .stats{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+  .stat{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:10px 14px;min-width:120px}
+  .stat .n{font-size:20px;font-weight:800;letter-spacing:-.01em}
+  .stat .l{font-size:12px;color:var(--muted)}
+  .quotes{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .quote{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:14px 16px;font-size:14.5px}
+  .quote .who{display:block;margin-top:8px;font-size:12px;color:var(--muted);font-weight:600}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  ul{margin:0;padding-left:18px} li{margin:7px 0;font-size:15px}
+  table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;font-size:14px}
+  th,td{text-align:left;padding:13px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);background:var(--bg)}
+  tr:last-child td{border-bottom:none}
+  .pill{font-size:11px;font-weight:700;padding:3px 8px;border-radius:999px}
+  .pill.hot{background:var(--accentsoft);color:var(--accent)}
+  .pill.mid{background:#eef2f7;color:#41506a}
+  .pill.low{background:#f0f1f3;color:#8a93a0}
+  .note{color:var(--muted);font-size:13px;margin-top:34px;border-top:1px solid var(--line);padding-top:16px}
+  @media(max-width:680px){.quotes,.two{grid-template-columns:1fr}.avatar{flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <span class="tag">ICP Dossier · dummy data</span>
+  <h1>Your rich avatar is the solo agency owner</h1>
+  <p class="sub">Synthesized from 18 customer records, 10 reviews, 6 tickets, and 4 sales calls. Every line below is grounded in the source data. Blank signals were left blank.</p>
+
+  <h2>The rich avatar</h2>
+  <div class="card avatar">
+    <div class="badge">AJ</div>
+    <div>
+      <h3>"Agency Jordan"</h3>
+      <p class="role">Founder / operator, 1-5 person marketing agency · resells tools into client retainers</p>
+      <p>The top of the list is not random. The highest-revenue, highest-frequency buyers are all running tiny marketing agencies and reselling lifetime deals into their client retainers. They are not buying software. They are buying margin. One payment becomes recurring revenue across 8 to 20 clients, and the thing they fear most is overhead.</p>
+      <p>They buy often (20 to 34 orders each), decide fast when the price is one-time, and judge a tool on whether they will still use it in six months, not on its feature list. They want to look like a full team while staying a team of one.</p>
+      <div class="stats">
+        <div class="stat"><div class="n">~10%</div><div class="l">of buyers, top of revenue</div></div>
+        <div class="stat"><div class="n">20-34</div><div class="l">orders each</div></div>
+        <div class="stat"><div class="n">$5.2-8.4k</div><div class="l">lifetime spend</div></div>
+        <div class="stat"><div class="n">1-5</div><div class="l">team size</div></div>
+      </div>
+    </div>
+  </div>
+
+  <h2>Their words (verbatim)</h2>
+  <div class="quotes">
+    <div class="quote">"Lifetime deals are a cheat code for an agency. I buy the tool once, resell it into 8 client retainers, and pocket the difference."<span class="who">Jordan Reyes · BrightPath Agency · review</span></div>
+    <div class="quote">"I'm not buying software, I'm buying margin. The day I have to hire is the day my margin dies."<span class="who">Jordan Reyes · sales call</span></div>
+    <div class="quote">"I'm a team of one wearing nine hats. If it saves me from hiring, it's worth it."<span class="who">Marisol Vega · Delta Creative</span></div>
+    <div class="quote">"My clients think I have a whole team behind me. Punching way above my weight and I like it that way."<span class="who">Tomas Becker · North Loop Digital</span></div>
+    <div class="quote">"Every dollar of overhead I don't spend is a dollar of margin. Simple as that."<span class="who">Aisha Nelson · Scaleside</span></div>
+    <div class="quote">"Can I rebrand the output and put it in front of my clients? Half my value is that I bring the tools."<span class="who">Jordan Reyes · support ticket</span></div>
+  </div>
+
+  <h2>What they want vs. what they fear</h2>
+  <div class="two">
+    <div class="card">
+      <strong>Desires</strong>
+      <ul>
+        <li>Margin on every retainer, with no new monthly cost</li>
+        <li>Tools they can rebrand and resell to clients</li>
+        <li>To look like a full team while staying solo</li>
+        <li>Reliability over features: "will I still use it in 6 months?"</li>
+        <li>One-time pricing they own, not seats they rent</li>
+      </ul>
+    </div>
+    <div class="card">
+      <strong>Pains</strong>
+      <ul>
+        <li>Overhead and the pressure to hire (the margin killer)</li>
+        <li>Recurring SaaS bills that quietly eat profit</li>
+        <li>Looking small next to bigger competitors</li>
+        <li>Licensing friction across multiple client accounts</li>
+        <li>Time lost to manual, repetitive work</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>The segments below the avatar</h2>
+  <table>
+    <tr><th>Segment</th><th>Who</th><th>Value</th><th>What moves them</th></tr>
+    <tr>
+      <td><span class="pill hot">Rich avatar</span></td>
+      <td>Solo / small agency owners reselling deals (Jordan, Marisol, Tomas, Aisha, Ben)</td>
+      <td>Highest LTV, repeat buyers</td>
+      <td>Margin, resale, "no overhead," one-time pricing</td>
+    </tr>
+    <tr>
+      <td><span class="pill mid">In-house solo marketer</span></td>
+      <td>Only marketer at a small company, reports up (Sofia, Nadia, Priya)</td>
+      <td>Mid LTV, steady</td>
+      <td>Speed to a clean number, escape from "Monday reporting hell," works on day one</td>
+    </tr>
+    <tr>
+      <td><span class="pill low">One-time explorer</span></td>
+      <td>Founders / individuals who bought once on price (Owen, Sam, Carlos, Ruth, Gabby)</td>
+      <td>Low LTV, single order</td>
+      <td>Price and curiosity; low intent. Not the avatar. Useful as contrast.</td>
+    </tr>
+  </table>
+
+  <p class="note"><strong>Methodology.</strong> Ranked by trailing revenue, then cross-referenced the top cohort against reviews, tickets, and call notes for verbatim language. Grammar and slang were kept intact, not paraphrased. Fields with no real signal were left blank rather than guessed. Source: <code>dummy-data/</code> (fabricated for the workshop). Replace it with a real export and rerun.</p>
+</div>
+</body>
+</html>

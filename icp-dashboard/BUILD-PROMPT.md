@@ -9,10 +9,16 @@ produces two pages you can open in a browser: the ICP dossier and an example cam
 
 ```
 Read voice/voice-rules.md, skills/icp-synthesis/SKILL.md, and skills/ad-copy/SKILL.md in
-full before doing anything. Then work in two passes against dummy-data/customers.csv.
+full before doing anything. Your source data is the whole dummy-data/ folder:
+- customers.csv         (the list: revenue, orders, title, company, industry)
+- reviews.md            (verbatim review language)
+- support-tickets.md    (pains, in their words)
+- sales-call-notes.md   (why they actually buy)
 
 PASS 1 — SYNTHESIZE THE ICP (use the icp-synthesis skill)
 - Rank customers by trailing revenue. Isolate the top ~10%: that cohort is the rich avatar.
+- Cross-reference each high-value name against reviews.md, support-tickets.md, and
+  sales-call-notes.md and pull their exact words.
 - Describe that avatar as a real person, grounded only in what's in the data. Give them a
   name in the spirit of "Marketing Agency Matt." Note their job, their business model, why
   they buy repeatedly, and the outcome they're really buying.

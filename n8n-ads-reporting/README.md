@@ -62,14 +62,34 @@ node wired up next to Slack, switched off so it never breaks the demo. Turn it o
 Gmail credential by following [`email-setup.md`](email-setup.md) — the fast path is a Gmail
 App Password over SMTP (no Google Cloud setup).
 
-## Point it at your own accounts
+## Where the data comes from
 
-The two mock nodes (`Mock Google Ads` and `Mock Meta Ads`) are the only things you swap:
+The numbers you just saw in Slack are **hardcoded inside the two `Mock Google Ads` and
+`Mock Meta Ads` Code nodes** — open either node and the array is right there in the
+JavaScript. They're realistic but invented (one campaign is deliberately a red flag so the
+grading has something to catch). Nothing is fetched from anywhere; that's why the demo can't
+break.
 
-- **Google Ads:** replace `Mock Google Ads` with an HTTP Request node (or the Google Ads node) calling the [Google Ads API](https://developers.google.com/google-ads/api) `searchStream` for your customer ID. The cleanest path is a local `google-ads-mcp` server — see [google-ads-mcp-setup](https://github.com/nickyc1/google-ads-mcp-setup).
-- **Meta:** replace `Mock Meta Ads` with the [Meta Ads CLI/MCP](https://www.nickbuilds.ai/blog/meta-just-released-an-ads-cli-and-mcp) — one OAuth, no third-party app in the middle. See [meta-ads-mcp-setup](https://github.com/nickyc1/meta-ads-mcp-setup).
+The `dummy-data/*.json` files in this folder are **not** read by the workflow. They're the
+**data contract**: the exact shape (`campaign, spend, conversions, conversion_value, cpa,
+historical_cpa, ctr...`) your real ad data has to arrive in. Match that shape and everything
+downstream just works.
 
-Keep the rest of the workflow the same. The analysis and Slack nodes don't care where the numbers came from, as long as the shape matches the dummy data.
+## What you keep vs. what you swap
+
+This is the whole point of the demo. The workflow has two halves:
+
+- **Swap (the data source):** the two `Mock` nodes. In real life these become live API calls.
+- **Keep (the brain):** the `Analyze` node and the Slack / email delivery. The grading, the
+  anomaly flags, the plain-language decisions, the digest format — none of it cares where the
+  numbers came from. That's the reusable part you take with you.
+
+To go live, replace only the two mock nodes so they output the same shape as the contract:
+
+- **Google Ads:** an HTTP Request node (or the Google Ads node) calling the [Google Ads API](https://developers.google.com/google-ads/api) `searchStream` for your customer ID. Cleanest path: a local `google-ads-mcp` server — see [google-ads-mcp-setup](https://github.com/nickyc1/google-ads-mcp-setup).
+- **Meta:** the [Meta Ads CLI/MCP](https://www.nickbuilds.ai/blog/meta-just-released-an-ads-cli-and-mcp) — one OAuth, no third-party app in the middle. See [meta-ads-mcp-setup](https://github.com/nickyc1/meta-ads-mcp-setup).
+
+Leave `Analyze`, Slack, and email exactly as they are.
 
 > Before you let anything **write** to an account, run it read-only for ~2 weeks. When you do add write actions, gate them: Claude proposes → a second AI reviews → a human approves. Two AIs and a human before any dollar moves.
 

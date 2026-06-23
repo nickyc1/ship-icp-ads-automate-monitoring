@@ -1,0 +1,167 @@
+{
+  "name": "Daily Ads Reporting Digest (Google + Meta \u2192 Slack)",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "days",
+              "daysInterval": 1,
+              "triggerAtHour": 9
+            }
+          ]
+        }
+      },
+      "id": "2aa8bfaf-9322-493b-8542-667eb37e8b51",
+      "name": "Daily 9am",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        240,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Mock Google Ads daily metrics. Swap this node for an HTTP Request / google-ads-mcp call later.\n// Shape stays the same so nothing downstream changes.\nconst campaigns = [\n  { campaign: \"Brand - Search\",        platform: \"google\", spend: 820,  conversions: 41, conversion_value: 3120, cpa: 20.0, historical_cpa: 19.0, ctr: 0.112, clicks: 612, impressions: 5460 },\n  { campaign: \"Competitor - Search\",   platform: \"google\", spend: 1450, conversions: 22, conversion_value: 1980, cpa: 65.9, historical_cpa: 31.0, ctr: 0.041, clicks: 410, impressions: 9900 },\n  { campaign: \"PMax - All Products\",   platform: \"google\", spend: 2100, conversions: 78, conversion_value: 6890, cpa: 26.9, historical_cpa: 28.0, ctr: 0.066, clicks: 880, impressions: 13300 },\n  { campaign: \"Generic - High Intent\", platform: \"google\", spend: 240,  conversions: 14, conversion_value: 1510, cpa: 17.1, historical_cpa: 18.0, ctr: 0.094, clicks: 168, impressions: 1780 },\n  { campaign: \"Display - Remarketing\", platform: \"google\", spend: 560,  conversions: 6,  conversion_value: 430,  cpa: 93.3, historical_cpa: 88.0, ctr: 0.008, clicks: 240, impressions: 30000 }\n];\nreturn campaigns.map(c => ({ json: c }));"
+      },
+      "id": "5b1a4a72-26f1-4a95-a890-638a86887ca2",
+      "name": "Mock Google Ads",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        480,
+        280
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Mock Meta daily metrics. Swap for the Meta Ads CLI/MCP later (one OAuth, no third-party app).\n// frequency is Meta-specific and feeds fatigue checks.\nconst campaigns = [\n  { campaign: \"Prospecting - Broad\",    platform: \"meta\", spend: 1300, conversions: 47, conversion_value: 2010, cpa: 27.7, historical_cpa: 25.0, ctr: 0.014, clicks: 980,  impressions: 70000, frequency: 1.8 },\n  { campaign: \"Retargeting - 7d\",       platform: \"meta\", spend: 430,  conversions: 33, conversion_value: 1890, cpa: 13.0, historical_cpa: 14.0, ctr: 0.022, clicks: 410,  impressions: 18600, frequency: 3.9 },\n  { campaign: \"Lookalike - Buyers 1%\",  platform: \"meta\", spend: 760,  conversions: 18, conversion_value: 720,  cpa: 42.2, historical_cpa: 39.0, ctr: 0.010, clicks: 520,  impressions: 52000, frequency: 2.1 },\n  { campaign: \"Creator - Whitelisting\", platform: \"meta\", spend: 290,  conversions: 16, conversion_value: 1240, cpa: 18.1, historical_cpa: 21.0, ctr: 0.031, clicks: 300,  impressions: 9700,  frequency: 1.4 }\n];\nreturn campaigns.map(c => ({ json: c }));"
+      },
+      "id": "cca16e50-e09c-49fc-ab9a-f71e4845cc4a",
+      "name": "Mock Meta Ads",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        480,
+        520
+      ]
+    },
+    {
+      "parameters": {
+        "numberInputs": 2
+      },
+      "id": "a71f04ee-2de5-4a30-8002-f94663d6c6c4",
+      "name": "Merge",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [
+        720,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Grade every campaign on profit-to-spend, flag anomalies, and write a plain-language digest.\n// Profit, not ROAS, is the hero number. Edit the targets to match your business.\nconst TARGET = { google: 1.5, meta: 0.5 };\n\nconst rows = $input.all().map(i => i.json);\nconst totalSpend = rows.reduce((s, r) => s + r.spend, 0);\nconst totalValue = rows.reduce((s, r) => s + r.conversion_value, 0);\nconst avgSpend = totalSpend / rows.length;\n\nconst graded = rows.map(r => {\n  const ptos = r.conversion_value / r.spend;            // profit-to-spend proxy\n  const target = TARGET[r.platform] ?? 1.0;\n  const grade = ptos >= target ? \"green\" : \"red\";\n  const anomaly = r.cpa > 2 * r.historical_cpa;\n  let decision;\n  if (grade === \"red\") decision = \"Investigate or pause\";\n  else if (r.spend < avgSpend && r.conversions > 0) decision = \"Scale (underfunded winner)\";\n  else decision = \"Hold\";\n  return { ...r, ptos: Number(ptos.toFixed(2)), grade, decision, anomaly };\n});\n\nconst attention = graded.filter(g => g.grade === \"red\" || g.anomaly);\nconst blended = (totalValue / totalSpend).toFixed(2);\n\nconst fmt = g => `${g.grade === \"green\" ? \"\ud83d\udfe2\" : \"\ud83d\udd34\"} *${g.campaign}* (${g.platform}) \u2014 $${g.spend} spend, ${g.ptos}x value/spend \u2192 ${g.decision}${g.anomaly ? \"  \u26a0\ufe0f CPA 2x+ historical\" : \"\"}`;\n\nlet digest = `\ud83d\udcca *Daily Paid Media Digest*\\n`;\ndigest += `Spend $${totalSpend.toLocaleString()} \u00b7 Value $${totalValue.toLocaleString()} \u00b7 Blended ${blended}x\\n\\n`;\ndigest += `*Needs attention (${attention.length})*\\n`;\ndigest += attention.length ? attention.map(fmt).join(\"\\n\") : \"Nothing flagged. All campaigns at or above target.\";\ndigest += `\\n\\n*All campaigns*\\n`;\ndigest += graded.sort((a, b) => b.ptos - a.ptos).map(fmt).join(\"\\n\");\ndigest += `\\n\\n_You make the call. This is the analyst, not the boss._`;\n\nreturn [{ json: { digest, campaign_count: graded.length, flagged: attention.length } }];"
+      },
+      "id": "215038af-dcda-41b1-aece-9ff5f0ef19e2",
+      "name": "Analyze",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        960,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://hooks.slack.com/services/REPLACE/WITH/YOUR-WEBHOOK",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"text\": $json.digest } }}",
+        "options": {}
+      },
+      "id": "8afc715f-8f5d-49bb-83b9-cf96ba4c572a",
+      "name": "Post to Slack",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1200,
+        400
+      ]
+    }
+  ],
+  "connections": {
+    "Daily 9am": {
+      "main": [
+        [
+          {
+            "node": "Mock Google Ads",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Mock Meta Ads",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mock Google Ads": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mock Meta Ads": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Analyze",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Analyze": {
+      "main": [
+        [
+          {
+            "node": "Post to Slack",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {},
+  "meta": {
+    "templatecredsSetupCompleted": false
+  },
+  "tags": []
+}

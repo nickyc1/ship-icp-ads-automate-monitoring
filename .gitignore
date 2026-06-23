@@ -1,0 +1,13 @@
+# Never commit real credentials or customer data
+.env
+.env.*
+*credentials*.json
+*service-account*.json
+*token*.json
+secrets/
+# Generated live in the workshop
+icp-dashboard/example-output/*.html
+# OS / editor noise
+.DS_Store
+node_modules/
+__pycache__/

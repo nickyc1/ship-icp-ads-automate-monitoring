@@ -1,0 +1,7 @@
+[
+  { "campaign": "Brand - Search",        "platform": "google", "spend": 820,  "conversions": 41, "conversion_value": 3120, "cpa": 20.0, "historical_cpa": 19.0, "ctr": 0.112, "clicks": 612, "impressions": 5460 },
+  { "campaign": "Competitor - Search",   "platform": "google", "spend": 1450, "conversions": 22, "conversion_value": 1980, "cpa": 65.9, "historical_cpa": 31.0, "ctr": 0.041, "clicks": 410, "impressions": 9900 },
+  { "campaign": "PMax - All Products",   "platform": "google", "spend": 2100, "conversions": 78, "conversion_value": 6890, "cpa": 26.9, "historical_cpa": 28.0, "ctr": 0.066, "clicks": 880, "impressions": 13300 },
+  { "campaign": "Generic - High Intent", "platform": "google", "spend": 240,  "conversions": 14, "conversion_value": 1510, "cpa": 17.1, "historical_cpa": 18.0, "ctr": 0.094, "clicks": 168, "impressions": 1780 },
+  { "campaign": "Display - Remarketing", "platform": "google", "spend": 560,  "conversions": 6,  "conversion_value": 430,  "cpa": 93.3, "historical_cpa": 88.0, "ctr": 0.008, "clicks": 240, "impressions": 30000 }
+]

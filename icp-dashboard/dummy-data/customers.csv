@@ -1,0 +1,19 @@
+email,name,total_spent,order_count,customer_since,country,job_title,company_name,company_size,industry,notes
+jordan@brightpathagency.example,Jordan Reyes,8420,34,2021-03-11,US,Founder,BrightPath Agency,1-5,Marketing Agency,"lifetime deals are basically a cheat code for an agency. i resell the tools to clients and pocket the difference"
+marisol@deltacreative.example,Marisol Vega,7610,29,2021-06-02,US,Owner / Operator,Delta Creative,1-5,Marketing Agency,"i'm a team of one wearing 9 hats. anything that saves me from hiring is worth it"
+tomas@northloopdigital.example,Tomas Becker,6890,31,2020-11-19,DE,Managing Director,North Loop Digital,1-5,Marketing Agency,"my clients think i have a whole team. it's me and a stack of tools"
+aisha@scaleside.example,Aisha Nelson,6120,26,2021-01-08,GB,Freelance Consultant,Scaleside,1-5,Consulting,"every dollar of overhead i don't spend is a dollar of margin. simple as that"
+ben@craftfunnel.example,Ben Ortiz,5230,22,2021-09-14,US,Founder,CraftFunnel,1-5,Marketing Agency,"i buy first and figure out the use case later if the deal is good enough"
+priya@orbitgrowth.example,Priya Shah,4980,19,2022-02-21,CA,Growth Lead,Orbit Growth,6-20,SaaS,"need things that work on day one, i don't have time to learn another dashboard"
+liam@harbormedia.example,Liam Walsh,3110,12,2022-05-30,IE,Co-founder,Harbor Media,1-5,Marketing Agency,
+sofia@brightnest.example,Sofia Marin,2870,9,2022-07-18,ES,Marketing Manager,BrightNest,21-50,Ecommerce,"i'm the only marketer here, reporting to a CEO who wants numbers every monday"
+derek@payloadhq.example,Derek Combs,1990,7,2022-10-02,US,Head of Demand Gen,PayloadHQ,51-200,SaaS,
+nadia@verdantapps.example,Nadia Khoury,1740,6,2023-01-12,US,Performance Marketer,Verdant Apps,21-50,SaaS,"spending too much time stitching reports together by hand"
+owen@trailhead.example,Owen Pratt,560,2,2023-04-09,US,Solopreneur,Trailhead,1-5,Coaching,
+hana@mintlabs.example,Hana Suzuki,430,2,2023-06-27,JP,Designer,Mint Labs,1-5,Design,
+carlos@finchsoft.example,Carlos Mendez,180,1,2023-08-15,MX,Engineer,FinchSoft,6-20,SaaS,
+ruth@oakwell.example,Ruth Allen,95,1,2023-09-03,GB,Owner,Oakwell Shop,1-5,Retail,
+felix@nodeworks.example,Felix Braun,79,1,2023-10-21,DE,Student,,1-5,Other,
+gabby@loomline.example,Gabby Ross,69,1,2023-11-30,US,Marketing Coordinator,Loomline,21-50,SaaS,
+sam@driftboard.example,Sam Okafor,59,1,2024-01-14,NG,Founder,Driftboard,1-5,SaaS,"just exploring, not sure i'll use it yet"
+elena@brightpathagency.example,Elena Cruz,49,1,2024-02-08,US,Intern,BrightPath Agency,1-5,Marketing Agency,

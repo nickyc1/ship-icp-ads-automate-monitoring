@@ -1,0 +1,6 @@
+[
+  { "campaign": "Prospecting - Broad",    "platform": "meta", "spend": 1300, "conversions": 47, "conversion_value": 2010, "cpa": 27.7, "historical_cpa": 25.0, "ctr": 0.014, "clicks": 980, "impressions": 70000, "frequency": 1.8 },
+  { "campaign": "Retargeting - 7d",       "platform": "meta", "spend": 430,  "conversions": 33, "conversion_value": 1890, "cpa": 13.0, "historical_cpa": 14.0, "ctr": 0.022, "clicks": 410, "impressions": 18600, "frequency": 3.9 },
+  { "campaign": "Lookalike - Buyers 1%",  "platform": "meta", "spend": 760,  "conversions": 18, "conversion_value": 720,  "cpa": 42.2, "historical_cpa": 39.0, "ctr": 0.010, "clicks": 520, "impressions": 52000, "frequency": 2.1 },
+  { "campaign": "Creator - Whitelisting", "platform": "meta", "spend": 290,  "conversions": 16, "conversion_value": 1240, "cpa": 18.1, "historical_cpa": 21.0, "ctr": 0.031, "clicks": 300, "impressions": 9700,  "frequency": 1.4 }
+]

@@ -42,9 +42,10 @@ a workflow, so you create a blank one first. From the Overview screen:
    https://raw.githubusercontent.com/nickyc1/ship-icp-ads-automate-monitoring/main/n8n-ads-reporting/starter-workflow.json
    ```
    *(Or choose **Import from File...** and pick `n8n-ads-reporting/starter-workflow.json` from your clone — same result.)*
-4. The 6-node workflow drops onto the canvas. Click the **Post to Slack** node, and in the
-   **URL** field paste your Slack incoming webhook (create one at api.slack.com/apps →
-   Incoming Webhooks). That is the only setup.
+4. The workflow drops onto the canvas: six active nodes, plus an **Email the report**
+   node that ships switched off (ignore it for now). Click the **Post to Slack** node and
+   paste your Slack incoming webhook into the **URL** field. Need one? Follow
+   [`slack-setup.md`](slack-setup.md) — it's about a minute, from scratch.
 5. Click **Test workflow** (button at the bottom-center). The two Code nodes emit the dummy
    data, **Analyze** grades it, and the digest posts to your Slack channel.
 
@@ -53,6 +54,13 @@ pipeline fire end to end.
 
 > Demo tip: **Import from URL** is the cleanest move on a screen share — no file dialog, no
 > hunting through folders. Have the Slack webhook ready in your clipboard beforehand.
+
+### Also email the report
+
+Want the digest in inboxes too? The workflow already has an **Email the report (optional)**
+node wired up next to Slack, switched off so it never breaks the demo. Turn it on and add a
+Gmail credential by following [`email-setup.md`](email-setup.md) — the fast path is a Gmail
+App Password over SMTP (no Google Cloud setup).
 
 ## Point it at your own accounts
 

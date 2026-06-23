@@ -89,8 +89,27 @@
       "typeVersion": 4.2,
       "position": [
         1200,
-        400
+        300
       ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "you@gmail.com",
+        "toEmail": "team@example.com",
+        "subject": "Daily Paid Media Digest",
+        "emailFormat": "text",
+        "text": "={{ $json.digest }}",
+        "options": {}
+      },
+      "id": "bec30346-4b39-4645-85e4-91b0e8821c13",
+      "name": "Email the report (optional)",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        1200,
+        520
+      ],
+      "disabled": true
     }
   ],
   "connections": {
@@ -148,6 +167,11 @@
         [
           {
             "node": "Post to Slack",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Email the report (optional)",
             "type": "main",
             "index": 0
           }
